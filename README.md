@@ -35,6 +35,7 @@
 #### Image Processing pipeline
 * Perspective transform - the image is modified to appear from a birds veiw perspective using openCV getPerspectiveTransform and warpPerspective methods.
 
+The resulting image after applying perspecive transform:
 ![The resulting image after applying perspecive transform][image4]
 
 * Color thresholding to detect three types of terrain:
@@ -43,17 +44,18 @@
   ** Rocks - those are tiny pieces of the image that usaully appear in a navigable terrain but have distinct golden color. To detect them the function detect_rock() uses yellow color range in RGB space as follows:
     rgb_thresh_min = (110, 110, 5)
     rgb_thresh_max = (255, 255, 90)
+    Here is an example how image with a rock might look like:
+    ![Example of rock][image3]
 
-![Example of rock][image3]
 
-
+The resulting image after applying the binarization based on Navigble Terrain color thresholding:
 ![The resulting image after applying the binarization based on Navigble Terrain color thresholding][image5]
   
 * Rover-to-world coordinate map conversion to align the classified terrain image with world map.
 * Cartezian-to-polar coordinate converstion to aid the decision methods with average calculations.
 
-![Visualization of the pipeline after applying each step to the image. The red arrow in the right bottom image shows the average angle of navigable terrain in rover polar coordinates
-][image6]
+Here is a visualization of the pipeline after applying each step to the image. The red arrow in the right bottom image shows the average angle of navigable terrain in rover polar coordinates
+![alt text]][image6]
 
 The decision logic is based on a state machine with 3 modes:
 * Forward - the rover sees navigable terrain and drives forward towards the average angle of navigable terrain
